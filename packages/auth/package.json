@@ -1,0 +1,22 @@
+{
+    "name": "@sass/auth",
+    "version": "0.0.0",
+    "private": true,
+    "main": "src/index.ts",
+    "types": "src/index.ts",
+    "devDependencies": {
+        "@sass/eslint-config": "workspace:*",
+        "@sass/prettier": "workspace:*",
+        "@sass/tsconfig": "workspace:*"
+    },
+    "eslintConfig": {
+        "extends": [
+            "@sass/eslint-config/library"
+        ]
+    },
+    "prettier": "@sass/prettier",
+    "dependencies": {
+        "@casl/ability": "^6.7.1",
+        "zod": "^3.23.8"
+    }
+}
