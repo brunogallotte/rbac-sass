@@ -1,11 +1,11 @@
-import { FastifyInstance } from "fastify"
+import { FastifyError, FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 import { ZodError } from "zod"
 import { BadRequestError } from "./routes/_errors/bad-request-error"
 import { UnauthorizedError } from "./routes/_errors/unauthorized-error"
 
 type FastifyErrorHandler = FastifyInstance['errorHandler']
 
-export const errorHandler = (error, request, reply) => {
+export const errorHandler = (error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
     if (error instanceof ZodError) {
         return reply.status(400).send({
             message: 'Validation error',
