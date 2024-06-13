@@ -11,6 +11,12 @@ import { errorHandler } from './error-handler'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
 import { resetPassword } from './routes/auth/reset-password'
 import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
+import { env } from '@sass/env'
+import { createOrganization } from './routes/orgs/create-organization'
+import { getMembership } from './routes/orgs/get-membership'
+import { getOrganization } from './routes/orgs/get-organization'
+import { getOrganizations } from './routes/orgs/get-organizations'
+import { updateOrganization } from './routes/orgs/update-organization'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -28,7 +34,15 @@ app.register(fastifySwagger, {
         description: 'Full-stack SaaS app with multi-tenant & RBAC.',
         version: '1.0.0'
       },
-      servers: [],
+      components: {
+        securitySchemes: {
+          barearAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT'
+          }
+        }
+      }
     },
     transform: jsonSchemaTransform
 })
@@ -50,5 +64,11 @@ app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
 
-app.listen({ port: 3333 }).then(() => console.log('HTTP server running!'))
+app.register(createOrganization)
+app.register(getMembership)
+app.register(getOrganization)
+app.register(getOrganizations)
+app.register(updateOrganization)
+
+app.listen({ port: env.SERVER_PORT }).then(() => console.log('HTTP server running!'))
 

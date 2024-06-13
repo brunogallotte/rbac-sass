@@ -1,5 +1,5 @@
 {
     "extends": "@sass/tsconfig/library",
-    "include": ["src/**/*"]
+    "include": ["index.ts"]
 }
 
