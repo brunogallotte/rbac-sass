@@ -13,11 +13,6 @@ export async function getOrganization(app: FastifyInstance) {
             params: z.object({
                 slug: z.string()
             }),
-            body: z.object({
-                name: z.string(),
-                domain: z.string().nullish(),
-                shouldAttachUserByDoamin: z.boolean().optional()
-            }),
             response: {
                 200: z.object({
                     organization: z.object({
